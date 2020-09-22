@@ -1,2 +1,2 @@
 # bookings-service
-reservations features for FEC Open Table clone
+feature to see available times for selected dates and number of guests
