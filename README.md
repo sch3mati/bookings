@@ -1,6 +1,6 @@
 
 # bookings-service
-feature to see available times for selected dates and number of guests
+This is a feature to see available times for selected dates and number of guests
 
 ## Related Projects
 
