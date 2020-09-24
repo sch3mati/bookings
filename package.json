@@ -9,9 +9,11 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
-    "react-dev": "webpack -d --watch"
+    "react-dev": "webpack -d --watch",
+    "test": "jest"
   },
   "dependencies": {
+    "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
     "express": "^4.17.1",
     "jquery": "^2.2.1",
     "lodash": "^4.6.1",
@@ -26,6 +28,7 @@
     "babel-loader": "^8.1.0",
     "html-loader": "^1.3.0",
     "html-webpack-plugin": "^4.4.1",
+    "jest": "^26.4.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
