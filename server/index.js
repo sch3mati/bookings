@@ -10,10 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 
-app.post('/api/bookings/1', (req, res) => {
+app.post('/api/bookings/:restaurantId', (req, res) => {
   const reservation = req.query;
-  console.log(reservation);
-  db.addReservation(1, reservation.name, reservation.contactInfo, reservation.size, Date.parse(reservation.date));
+  db.addReservation(req.params.restaurantId, reservation.name, reservation.contactInfo, reservation.size, Date.parse(reservation.date));
   res.send('received');
 });
 
