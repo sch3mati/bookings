@@ -5,6 +5,6 @@ const calculateReservations = (reservationData, restaurantData, partySize) => {
   //map through reservationData
   //  add the partySize for each reservation to the reference array
   //map through reference array, calculate which time increments have enough space
-  //  remove time increments that are full
+  //  remove time increments that do not have enough space for new reservation
   //return final array of available time slots
 }
