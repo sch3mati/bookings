@@ -12,10 +12,12 @@ const addRestaurant = (name, seatCapactiy) => {
   });
 };
 
-const addReservation = (restaurantId, name, contactInfo, partySize, date, occasion = null) => {
-  dbConnection.query(`insert into reservations (restaurantId, name, contactInfo, partySize, date, occasion) values ("${restaurantId}", "${name}", "${contactInfo}", ${partySize}, ${date}, "${occasion}")`, (err, data) => {
+const addReservation = (data, callback) => {
+  dbConnection.query(`insert into reservations (restaurantId, name, contactInfo, partySize, date, occasion) values ("${data.restaurantId}", "${data.name}", "${data.contactInfo}", ${data.partySize}, ${Date.parse(data.date)}, "${data.occasion ? occasion : null}")`, (err, data) => {
     if (err) {
-      console.log(err);
+      callback(err);
+    } else {
+      callback();
     }
   });
 };
