@@ -22,7 +22,24 @@ const addReservation = (data, callback) => {
   });
 };
 
+const getReservations = (data, callback) => {
+  const timeRange = 2.5 * 60 * 60 * 1000;
+  dbConnection.query(`select * from reservations where restaurantId = ${data.restaurantId} and date > ${Date.parse(data.date) - timeRange} and date < ${Date.parse(data.date) + timeRange}`, (err, reservationData) => {
+    if (err) {
+      callback(err);
+    } else {
+      dbConnection.query(`select seatCapacity from restaurants where id = ${data.restaurantId}`, (err, restaurantData) => {
+        if (err) {
+          callback(err);
+        } else {
+          callback(null, reservationData, restaurantData);
+        }
+      });
+    }
+  });
+};
 
 
 module.exports.addRestaurant = addRestaurant;
 module.exports.addReservation = addReservation;
+module.exports.getReservations = getReservations;

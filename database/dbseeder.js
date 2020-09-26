@@ -17,7 +17,7 @@ for (let restaurant = 0; restaurant < numberOfRestaurants; restaurant++) {
 for (let restaurant = 1; restaurant <= numberOfRestaurants; restaurant++) {
   for (let reservation = 1; reservation <= reservationsPerDay * daysOfReservations; reservation++) {
     const partySize = faker.random.number({min: 1, max: 10});
-    const date = faker.date.future(7);
+    const date = faker.date.soon(7);
     const name = faker.name.findName();
     const contactInfo = faker.phone.phoneNumber();
     data = {
