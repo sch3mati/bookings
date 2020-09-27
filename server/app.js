@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../database');
+const calculateReservations = require('./calculateReservations');
 
 const app = express();
 
@@ -29,8 +30,7 @@ app.get('/api/bookings/:restaurantId', (req, res) => {
     if (err) {
       res.status(400).send('error finding reservations');
     } else {
-      console.log(reservationData, restaurantData, reservation.partySize);
-      res.status(200).send('done');
+      res.status(200).send(calculateReservations(reservationData, restaurantData, reservation));
     }
   });
 });

@@ -10,7 +10,7 @@ const restaurantEnding = ['Cafe', 'Restaurant', 'Steak House', 'Pizza House', 'D
 
 for (let restaurant = 0; restaurant < numberOfRestaurants; restaurant++) {
   const name = `${faker.name.firstName()}'s ${restaurantEnding[Math.floor(Math.random() * 13)]}`;
-  const seatCapacity = faker.random.number({min: 40, max: 80});
+  const seatCapacity = faker.random.number({min: 12, max: 25});
   db.addRestaurant(name, seatCapacity);
 }
 

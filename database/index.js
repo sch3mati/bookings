@@ -13,7 +13,7 @@ const addRestaurant = (name, seatCapactiy) => {
 };
 
 const addReservation = (data, callback) => {
-  dbConnection.query(`insert into reservations (restaurantId, name, contactInfo, partySize, date, occasion) values ("${data.restaurantId}", "${data.name}", "${data.contactInfo}", ${data.partySize}, ${Date.parse(data.date)}, "${data.occasion ? occasion : null}")`, (err, data) => {
+  dbConnection.query(`insert into reservations (restaurantId, name, contactInfo, partySize, date, occasion) values ("${data.restaurantId}", "${data.name}", "${data.contactInfo}", ${data.partySize}, ${Date.parse(data.date) - (Date.parse(data.date) % 1800000)}, "${data.occasion ? occasion : null}")`, (err, data) => {
     if (err) {
       callback(err);
     } else {
@@ -24,7 +24,7 @@ const addReservation = (data, callback) => {
 
 const getReservations = (data, callback) => {
   const timeRange = 2.5 * 60 * 60 * 1000;
-  dbConnection.query(`select * from reservations where restaurantId = ${data.restaurantId} and date > ${Date.parse(data.date) - timeRange} and date < ${Date.parse(data.date) + timeRange}`, (err, reservationData) => {
+  dbConnection.query(`select partySize, date from reservations where restaurantId = ${data.restaurantId} and date >= ${Date.parse(data.date) - timeRange} and date <= ${Date.parse(data.date) + timeRange}`, (err, reservationData) => {
     if (err) {
       callback(err);
     } else {
