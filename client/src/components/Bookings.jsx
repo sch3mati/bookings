@@ -53,7 +53,7 @@ class Bookings extends React.Component {
     this.state = {
       partySize: 2,
       date: (new Date()).toLocaleDateString(),
-      time: (new Date()).getHours()+1
+      time: (new Date()).getHours() + 1
     };
   }
 
@@ -66,13 +66,13 @@ class Bookings extends React.Component {
   handleDate(e) {
     this.setState({
       date: e.target.value
-    })
+    });
   }
 
   handleTime(e) {
     this.setState({
       time: e.target.value
-    })
+    });
   }
 
 
