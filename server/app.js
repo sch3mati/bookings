@@ -25,7 +25,6 @@ app.post('/api/bookings/:restaurantId', (req, res) => {
 app.get('/api/bookings/:restaurantId', (req, res) => {
   const reservation = req.query;
   reservation.restaurantId = req.params.restaurantId;
-  console.log(reservation);
   db.getReservations(reservation, (err, reservationData, restaurantData) => {
     if (err) {
       res.status(400).send('error finding reservations');

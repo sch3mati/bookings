@@ -20,7 +20,8 @@
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "test": "jest",
-    "seed": "node database/dbseeder.js"
+    "seed": "node database/dbseeder.js",
+    "sql": "mysql -u root -p < database/schema.sql"
   },
   "dependencies": {
     "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
@@ -53,6 +54,7 @@
     "jest": "^26.4.2",
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
+    "jest-mysql": "^1.0.0",
     "superagent": "^6.1.0",
     "supertest": "^5.0.0",
     "webpack": "^4.44.1",
