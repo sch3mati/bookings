@@ -1,5 +1,6 @@
 import React from 'react';
 import Select, { components } from 'react-select';
+import styled from 'styled-components';
 
 const SingleValue = props => (
   <components.SingleValue {...props}>
@@ -19,9 +20,10 @@ for (let i = 1; i <= 10; i++) {
 class PartySize extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      partySize: ''
-    };
+  }
+
+  handlePartySize(e) {
+    this.props.handlePartySize(e.value);
   }
 
   render() {
@@ -29,7 +31,7 @@ class PartySize extends React.Component {
       <div>
         <div>Party Size</div>
         <div>
-          <Select options={options} components={{ SingleValue }} />
+          <Select defaultValue={{ label: 2, chipLabel: 'For 2', value: 2 }} onChange={this.handlePartySize.bind(this)} options={options} components={{ SingleValue }} />
         </div>
       </div>
     );

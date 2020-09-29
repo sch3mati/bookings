@@ -10,8 +10,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 
+app.get('/:restaurantId', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../public/index.html'));
+});
+
 app.post('/api/bookings/:restaurantId', (req, res) => {
   const reservation = req.query;
+  console.log(reservation);
   reservation.restaurantId = req.params.restaurantId;
   db.addReservation(reservation, (err) => {
     if (err) {
