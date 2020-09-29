@@ -29,7 +29,7 @@ class ReservationTime extends React.Component {
     return (
       <div>
         <div>Time</div>
-        <Select defaultValue={{ label: '12:00 PM', value: '12:00 PM' }} onChange={this.handleTime.bind(this)} options={options} components={{ SingleValue }} />
+        <Select defaultValue={{ label: '7:00 PM', value: '7:00 PM' }} onChange={this.handleTime.bind(this)} options={options} components={{ SingleValue }} />
       </div>
     );
   }

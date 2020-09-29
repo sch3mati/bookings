@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "seed": "node database/dbseeder.js",
     "sql": "mysql -u root -p < database/schema.sql"
   },

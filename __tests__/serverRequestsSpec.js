@@ -1,10 +1,6 @@
 const app = require('../server/app');
 const supertest = require('supertest');
 const request = supertest(app);
-const mysql = require('mysql');
-const mysqlConfig = require('../database/config.js');
-
-const dbConnection = mysql.createConnection(mysqlConfig);
 
 describe('Test responses for localhost:3000/ endpoints', () => {
 
@@ -12,24 +8,27 @@ describe('Test responses for localhost:3000/ endpoints', () => {
     return request
       .get('/')
       .then(response => {
-        expect(response.statusCode).not.toBe(404);
+        expect(response.statusCode).toBe(200);
       });
   });
 
-  test(`Handles GET request to localhost:3000/api/bookings/${Math.floor(Math.random() * 100)}`, () => {
+  test('Handles GET request to localhost:3000/api/bookings/{1-100}', (done) => {
     return request
-      .get('/api/bookings/28')
-      .then(response => {
-        expect(response.statusCode).not.toBe(404);
-      });
+      .get(`/api/bookings/${Math.floor(Math.random() * 100)}`)
+      .query({ date: 'September 30, 2020 10:30:00', partySize: '10' })
+      .expect(200).end(done);
   });
 
-  test(`Handles for POST request to localhost:3000/api/bookings/${Math.floor(Math.random() * 100)}`, () => {
+  test('Handles for POST request to localhost:3000/api/bookings/{1-100}', (done) => {
     return request
-      .post('/api/bookings/28')
-      .then(response => {
-        expect(response.statusCode).not.toBe(404);
-      });
+      .post(`/api/bookings/${Math.floor(Math.random() * 100)}`)
+      .query({
+        date: 'September 30, 2020 10:30:00',
+        partySize: '10',
+        name: 'Johnny tang',
+        contactInfo: '2222222'
+      })
+      .expect(200).end(done);
   });
 
 });
