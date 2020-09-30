@@ -9,7 +9,7 @@ describe('< Bookings />', () => {
   });
   it('has partySize and dateTime state', () => {
     expect(wrapper).toHaveState('partySize');
-    expect(wrapper).toHaveState('ReservationDate');
-    expect(wrapper).toHaveState('ReservationTime');
+    expect(wrapper).toHaveState('reservationDate');
+    expect(wrapper).toHaveState('reservationTime');
   });
 });

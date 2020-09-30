@@ -22,7 +22,7 @@ describe('Test responses for localhost:3000/ endpoints', () => {
   test('Handles for POST request to localhost:3000/api/bookings/{1-100}', (done) => {
     return request
       .post(`/api/bookings/${Math.floor(Math.random() * 100)}`)
-      .query({
+      .send({
         date: 'September 30, 2020 10:30:00',
         partySize: '10',
         name: 'Johnny tang',
