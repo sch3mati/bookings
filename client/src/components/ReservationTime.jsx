@@ -20,6 +20,9 @@ for (let hour = 7; hour < 24; hour++) {
 }
 
 class ReservationTime extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   handleTime(e) {
     this.props.handleTime(e.value);

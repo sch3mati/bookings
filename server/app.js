@@ -15,7 +15,7 @@ app.get('/:restaurantId', (req, res) => {
 });
 
 app.post('/api/bookings/:restaurantId', (req, res) => {
-  const reservation = req.query;
+  const reservation = req.body;
   console.log(reservation);
   reservation.restaurantId = req.params.restaurantId;
   db.addReservation(reservation, (err) => {
