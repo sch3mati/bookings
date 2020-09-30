@@ -12,7 +12,8 @@
     "react-dev": "webpack -d --watch",
     "test": "jest --detectOpenHandles",
     "seed": "node database/dbseeder.js",
-    "sql": "mysql -u root -p < database/schema.sql"
+    "sql": "mysql -u root -p < database/schema.sql",
+    "test:coverage": "jest --verbose --coverage --detectOpenHandles"
   },
   "dependencies": {
     "axios": "^0.20.0",

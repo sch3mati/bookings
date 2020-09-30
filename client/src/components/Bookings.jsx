@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Availabilities from './Availabilities.jsx';
 import ReservationModal from './ReservationModal.jsx';
+import Calendar from './Calendar.jsx';
 
 const Wrapper = styled.section `
   width: 320px;
@@ -19,8 +20,9 @@ const Wrapper = styled.section `
 `;
 
 const Title = styled.div `
-  font-family: 'Mukta', Helvetica;
+  font-family: Helvetica;
   border-bottom: 1px solid #d8d9db;
+  margin-bottom: 16px;
 `;
 
 const Button = styled.button `
@@ -38,7 +40,7 @@ const Button = styled.button `
 `;
 
 const BookedAmount = styled.span `
-  font-family: 'Mukta', Helvetica;
+  font-family: Helvetica;
   height: 24px;
   font-size: 14px;
   font-weight: 500;
@@ -138,6 +140,7 @@ class Bookings extends React.Component {
           </BookedAmount>
         </Wrapper>
         {modal}
+        < Calendar />
       </div>
     );
   }

@@ -24,7 +24,7 @@ const Select = styled.div `
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
-  font-family: 'Mukta', Helvetica;
+  font-family: Helvetica;
   margin: .5rem;
   text-align: left
 `;
