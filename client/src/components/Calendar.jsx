@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const november = new Array;
+for (let i = 1; i <= 42; i++) {
+  november.push(i % 30 ? i % 30 : 30);
+}
+
 const october = [27, 28, 29, 30];
 for (let i = 1; i <= 38; i++) {
   october.push(i % 31 ? i % 31 : 31);
@@ -13,7 +18,8 @@ for (let i = 1; i <= 40; i++) {
 
 const months = {
   9: { name: 'September', dates: september },
-  10: { name: 'October', dates: october }
+  10: { name: 'October', dates: october },
+  11: { name: 'November', dates: november }
 };
 
 const Container = styled.div `

@@ -46,10 +46,11 @@ class ReservationDate extends React.Component {
 
   render() {
     const selectedDate = new Date(this.props.selectedDate);
+    console.log(selectedDate);
     return (
       <Container>
         <DateTitle>Date</DateTitle>
-        <DateButton onClick={this.props.handleDate}>
+        <DateButton onClick={this.props.handleDate.bind(this)}>
           {`${days[selectedDate.getDay()]}, ${selectedDate.getMonth()}/${selectedDate.getDate()}`}
         </DateButton>
       </Container>
