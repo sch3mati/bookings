@@ -1,15 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const October = new Array;
-for (let i = 27; i < 27 + 42; i++) {
-  October.push(i % 30);
+const october = [27, 28, 29, 30];
+for (let i = 1; i <= 38; i++) {
+  october.push(i % 31 ? i % 31 : 31);
 }
+
+const september = [30, 31];
+for (let i = 1; i <= 40; i++) {
+  september.push(i % 30 ? i % 30 : 30);
+}
+
+const months = {
+  9: { name: 'September', dates: september },
+  10: { name: 'October', dates: october }
+};
 
 const Container = styled.div `
   margin: 0px;
-  width: 290px;
+  1px solid #d8d9db;
+  padding: 16px;
+  width: 288px;
   height: 305px;
+  background-color: #f1f2f4;
+  margin: 16px;
+  transform: translate(0px,-110px);
 `;
 
 const MonthContainer = styled.div `
@@ -65,37 +80,57 @@ const DateContainer = styled.div `
   display: grid;
   height: 70%;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
 `;
 
 const Date = styled.div `
-  border: 2px white solid;
+  box-sizing: border-box;
+  border: 1px #d8d9db solid;
+  background-color: white;
   font-family: helvetica;
   font-size: .875rem;
   font-weight: 700;
   color: #2d333f;
   text-align: center;
   align-self: stretch;
+  line-height: 250%;
+  vertical-align: middle;
   &:hover {
-    border: 2px solid #da3743;
+    border: 1px solid #da3743;
   }
 `;
 
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      month: 9
+    };
   }
 
-  handleDate (e) {
-    console.log(e.target.innerText);
+  handleDate(e) {
+    this.props.pickDate(`${months[this.state.month].name} ${e.target.innerText}, 2020`);
+  }
+
+  nextMonth(e) {
+    this.setState({
+      month: this.state.month + 1
+    });
+  }
+
+  previousMonth(e) {
+    this.setState({
+      month: this.state.month - 1
+    });
   }
 
   render() {
     return (
       <Container>
         <MonthContainer>
-          <Arrow>&lsaquo;</Arrow>
-          <Month>September 2020</Month>
-          <Arrow>&rsaquo;</Arrow>
+          <Arrow onClick={this.previousMonth.bind(this)}>&lsaquo;</Arrow>
+          <Month>{months[this.state.month].name} 2020</Month>
+          <Arrow onClick={this.nextMonth.bind(this)}>&rsaquo;</Arrow>
         </MonthContainer>
         <DayContainer>
           <Day>Sun</Day>
@@ -107,7 +142,7 @@ class Calendar extends React.Component {
           <Day>Sat</Day>
         </DayContainer>
         <DateContainer>
-          {October.map((date) => (
+          {months[this.state.month].dates.map((date) => (
             <Date onClick={this.handleDate.bind(this)}>{date}</Date>
           ))}
         </DateContainer>

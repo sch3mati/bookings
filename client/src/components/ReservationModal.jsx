@@ -86,7 +86,7 @@ class ReservationModal extends React.Component {
       contactInfo: this.state.contactInfo,
       occasion: this.state.occasion,
     };
-    axios.post('/api/bookings/5', data)
+    axios.post(`/api/bookings/${this.props.restaurantId}`, data)
       .then(response => {
         console.log(response);
       })
@@ -148,7 +148,7 @@ class ReservationModal extends React.Component {
             <div>
               <RestaurantImage src="https://media.radissonhotels.net/image/radisson-montevideo-victoria-plaza-hotel/restaurant/16256-114279-f63607438_3xl.jpg?impolicy=CustomCrop&cwidth=256&cheight=256"></RestaurantImage>
               <ReservationDetails>
-                <RestaurantName>Restaurant Name</RestaurantName>
+                <RestaurantName>{this.props.restaurantName}</RestaurantName>
                 <Icon src='https://cdn.iconscout.com/icon/premium/png-256-thumb/calendar-2513417-2104741.png'></Icon>
                 <Details>{this.props.date}</Details>
                 <Icon src='https://freeiconshop.com/wp-content/uploads/edd/clock-outline.png'></Icon>

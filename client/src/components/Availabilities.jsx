@@ -43,7 +43,7 @@ class Availabilities extends React.Component {
       <div>
         <Select>Select a time:</Select>
         {this.props.availabilities.map((availability) => (
-          <Button onClick={this.pickTime.bind(this)} key={availability} value={(new Date(availability)).toLocaleTimeString()}>{(new Date(availability)).toLocaleTimeString([], {timeStyle: 'short'})}</Button>
+          <Button onClick={this.pickTime.bind(this)} key={availability} value={(new Date(availability)).toLocaleTimeString([], {timeStyle: 'short'})}>{(new Date(availability)).toLocaleTimeString([], {timeStyle: 'short'})}</Button>
         ))}
       </div>
     );

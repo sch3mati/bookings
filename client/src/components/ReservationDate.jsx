@@ -2,6 +2,8 @@ import React from 'react';
 import Select, { components } from 'react-select';
 import styled from 'styled-components';
 
+const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 const Container = styled.div `
   display: inline-block
 `;
@@ -14,8 +16,10 @@ const DateTitle = styled.div `
   text-align: left;
 `;
 
-const DateSelect = styled.select `
-  box-sizing: border-box;
+const DateButton = styled.button `
+background-color: white;
+text-align: left;
+box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #d8d9db;
   width: 152px;
@@ -32,16 +36,22 @@ const DateSelect = styled.select `
 
 class ReservationDate extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   handleDate(e) {
-    this.props.handleDate(e.value);
+    this.props.handleDate();
   }
 
   render() {
+    const selectedDate = new Date(this.props.selectedDate);
     return (
       <Container>
         <DateTitle>Date</DateTitle>
-        <DateSelect>
-        </DateSelect>
+        <DateButton onClick={this.props.handleDate}>
+          {`${days[selectedDate.getDay()]}, ${selectedDate.getMonth()}/${selectedDate.getDate()}`}
+        </DateButton>
       </Container>
     );
   }

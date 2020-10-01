@@ -24,7 +24,7 @@ const PartySelect = styled.select `
   border-bottom: 1px solid #d8d9db;
   width: 312px;
   height: 34px;
-  margin: 0 .5rem .5rem 0;
+  margin: 0 0 .5rem 0;
   cursor: pointer;
   &:hover {
     border-bottom: 2px solid #da3743;
@@ -37,17 +37,23 @@ const PartySelect = styled.select `
 class PartySize extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selected: 2
+    };
   }
 
   handlePartySize(e) {
-    this.props.handlePartySize(e.value);
+    this.props.handlePartySize(e.target.value);
+    this.setState({
+      selected: e.target.value
+    });
   }
 
   render() {
     return (
       <Container>
         <PartyTitle>Party Size</PartyTitle>
-        <PartySelect>
+        <PartySelect onChange={this.handlePartySize.bind(this)} value={this.state.selected}>
           {options.map(option => (
             <option key={option} value={option} label={`For ${option}`}>{option}</option>
           ))};

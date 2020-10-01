@@ -44,14 +44,14 @@ class ReservationTime extends React.Component {
   }
 
   handleTime(e) {
-    this.props.handleTime(e.value);
+    this.props.handleTime(e.target.value);
   }
 
   render() {
     return (
       <Container>
         <TimeTitle>Time</TimeTitle>
-        <TimeSelect>
+        <TimeSelect onChange={this.handleTime.bind(this)}>
           {options.map(option => (
             <option key={option} value={option}>{option}</option>
           ))};

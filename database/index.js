@@ -22,6 +22,16 @@ const addReservation = (data, callback) => {
   });
 };
 
+const getRestaurantName = (restaurantId, callback) => {
+  dbConnection.query(`select name from restaurants where id = ${restaurantId}`, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
 const getReservations = (data, callback) => {
   const timeRange = 2.5 * 60 * 60 * 1000;
   dbConnection.query(`select partySize, date from reservations where restaurantId = ${data.restaurantId} and date >= ${Date.parse(data.date) - timeRange} and date <= ${Date.parse(data.date) + timeRange}`, (err, reservationData) => {
@@ -43,3 +53,4 @@ const getReservations = (data, callback) => {
 module.exports.addRestaurant = addRestaurant;
 module.exports.addReservation = addReservation;
 module.exports.getReservations = getReservations;
+module.exports.getRestaurantName = getRestaurantName;
