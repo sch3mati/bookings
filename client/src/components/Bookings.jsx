@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Availabilities from './Availabilities.jsx';
 import ReservationModal from './ReservationModal.jsx';
+import Calendar from './Calendar.jsx';
 
 const Wrapper = styled.section `
   width: 320px;
@@ -19,8 +20,9 @@ const Wrapper = styled.section `
 `;
 
 const Title = styled.div `
-  font-family: 'Mukta', Helvetica;
+  font-family: Helvetica;
   border-bottom: 1px solid #d8d9db;
+  margin-bottom: 16px;
 `;
 
 const Button = styled.button `
@@ -38,7 +40,7 @@ const Button = styled.button `
 `;
 
 const BookedAmount = styled.span `
-  font-family: 'Mukta', Helvetica;
+  font-family: Helvetica;
   height: 24px;
   font-size: 14px;
   font-weight: 500;
@@ -56,12 +58,28 @@ class Bookings extends React.Component {
     super();
     this.state = {
       partySize: 2,
+      restaurantId: 10,
+      restaurantName: '',
       reservationDate: (new Date()).toLocaleDateString(),
       reservationTime: '7:00 PM',
       availabilities: new Array,
       displayTimes: false,
-      modalOpen: false
+      confirmationModalOpen: false,
+      calendarModalOpen: false,
     };
+  }
+
+  componentDidMount() {
+    axios.get(`/api/bookings/restaurantName/${this.state.restaurantId}`, {
+      params: {
+        restaurantId: this.state.restaurantId
+      }
+    })
+      .then(response => {
+        this.setState({
+          restaurantName: response.data[0].name
+        });
+      });
   }
 
   handlePartySize(partySize) {
@@ -71,8 +89,10 @@ class Bookings extends React.Component {
     });
   }
 
-  handleDate(date) {
-    console.log(date);
+  handleDate() {
+    this.setState({
+      calendarModalOpen: !this.state.calendarModalOpen
+    });
   }
 
   handleTime(time) {
@@ -83,7 +103,7 @@ class Bookings extends React.Component {
   }
 
   handleSearch() {
-    axios.get('/api/bookings/20', {
+    axios.get(`/api/bookings/${this.state.restaurantId}`, {
       params: {
         date: `${this.state.reservationDate} ${this.state.reservationTime}`,
         partySize: this.state.partySize
@@ -100,7 +120,7 @@ class Bookings extends React.Component {
   handleReserve(time) {
     this.setState({
       reservationTime: time,
-      modalOpen: true
+      confirmationModalOpen: true
     });
   }
 
@@ -112,24 +132,38 @@ class Bookings extends React.Component {
 
   hideModal() {
     this.setState({
-      modalOpen: false
+      confirmationModalOpen: false
+    });
+  }
+
+  pickDate(date) {
+    this.setState({
+      reservationDate: date,
+      calendarModalOpen: !this.state.calendarModalOpen
     });
   }
 
   render() {
-    const renderModal = this.state.modalOpen;
-    let modal;
-    if (renderModal) {
-      modal = < ReservationModal partySize={this.state.partySize} date={this.state.reservationDate} time={this.state.reservationTime} hideModal={this.hideModal.bind(this)} handleDisplayTimes={this.handleDisplayTimes.bind(this)}/>;
+    const renderConfirmationModal = this.state.confirmationModalOpen;
+    const renderCalenderModal = this.state.calendarModalOpen;
+    let confirmationModal;
+    let calendarModal;
+    if (renderConfirmationModal) {
+      confirmationModal = < ReservationModal restaurantName={this.state.restaurantName} partySize={this.state.partySize} date={this.state.reservationDate} time={this.state.reservationTime} hideModal={this.hideModal.bind(this)} handleDisplayTimes={this.handleDisplayTimes.bind(this)}/>;
     } else {
-      modal = <div></div>;
+      confirmationModal = <div></div>;
+    }
+    if (renderCalenderModal) {
+      calendarModal = < Calendar pickDate={this.pickDate.bind(this)}/>;
+    } else {
+      calendarModal = <div></div>;
     }
     return (
       <div>
         <Wrapper>
           <Title>Make a reservation</Title>
           < PartySize handlePartySize={this.handlePartySize.bind(this)}/>
-          < ReservationDate handleDate={this.handleDate.bind(this)} />
+          < ReservationDate selectedDate={this.state.reservationDate} handleDate={this.handleDate.bind(this)} />
           < ReservationTime handleTime={this.handleTime.bind(this)} />
           {this.state.displayTimes ? < Availabilities handleReserve={this.handleReserve.bind(this)} availabilities={this.state.availabilities} /> : < Button onClick={this.handleSearch.bind(this)} >Find a table</Button>}
           <ChartIcon src="https://cdn.icon-icons.com/icons2/1875/PNG/512/linechart_120376.png"></ChartIcon>
@@ -137,7 +171,8 @@ class Bookings extends React.Component {
               Booked {5 + Math.floor(Math.random() * 5)} times today
           </BookedAmount>
         </Wrapper>
-        {modal}
+        {confirmationModal}
+        {calendarModal}
       </div>
     );
   }
