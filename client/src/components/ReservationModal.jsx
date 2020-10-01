@@ -159,8 +159,8 @@ class ReservationModal extends React.Component {
             </div>
             <div>Diner Details</div>
             <div>
-              <input onChange={this.handleFirst.bind(this)} placeholder="First name"></input>
-              <input onChange={this.handleLast.bind(this)} placeholder="Last name"></input>
+              <input onChange={this.handleFirst.bind(this)} type="text" placeholder="First name"></input>
+              <input onChange={this.handleLast.bind(this)} type="text" placeholder="Last name"></input>
             </div>
             <div>
               <input type="tel" autocomplete="tel" placeholder="Phone number" onChange={this.handleContact.bind(this)}></input>
