@@ -104,7 +104,7 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      month: 9
+      month: 10
     };
   }
 
