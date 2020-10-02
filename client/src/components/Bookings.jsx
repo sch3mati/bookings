@@ -149,12 +149,12 @@ class Bookings extends React.Component {
     let confirmationModal;
     let calendarModal;
     if (renderConfirmationModal) {
-      confirmationModal = < ReservationModal restaurantName={this.state.restaurantName} partySize={this.state.partySize} date={this.state.reservationDate} time={this.state.reservationTime} hideModal={this.hideModal.bind(this)} handleDisplayTimes={this.handleDisplayTimes.bind(this)}/>;
+      confirmationModal = < ReservationModal restaurantId={this.state.restaurantId} restaurantName={this.state.restaurantName} partySize={this.state.partySize} date={this.state.reservationDate} time={this.state.reservationTime} hideModal={this.hideModal.bind(this)} handleDisplayTimes={this.handleDisplayTimes.bind(this)}/>;
     } else {
       confirmationModal = <div></div>;
     }
     if (renderCalenderModal) {
-      calendarModal = < Calendar pickDate={this.pickDate.bind(this)}/>;
+      calendarModal = < Calendar selectedDate={this.state.reservationDate} pickDate={this.pickDate.bind(this)}/>;
     } else {
       calendarModal = <div></div>;
     }

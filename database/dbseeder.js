@@ -2,7 +2,7 @@
 const faker = require('faker');
 const db = require('./index.js');
 
-const daysOfReservations = 7;
+const daysOfReservations = 10;
 const numberOfRestaurants = 100;
 const reservationsPerDay = 100;
 
@@ -17,7 +17,7 @@ for (let restaurant = 0; restaurant < numberOfRestaurants; restaurant++) {
 for (let restaurant = 1; restaurant <= numberOfRestaurants; restaurant++) {
   for (let reservation = 1; reservation <= reservationsPerDay * daysOfReservations; reservation++) {
     const partySize = faker.random.number({min: 1, max: 10});
-    const date = faker.date.soon(7);
+    const date = faker.date.soon(daysOfReservations);
     const name = faker.name.findName();
     const contactInfo = faker.phone.phoneNumber();
     data = {
