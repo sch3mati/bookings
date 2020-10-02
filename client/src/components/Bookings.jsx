@@ -58,7 +58,7 @@ class Bookings extends React.Component {
     super();
     this.state = {
       partySize: 2,
-      restaurantId: 10,
+      restaurantId: 88,
       restaurantName: '',
       reservationDate: (new Date()).toLocaleDateString(),
       reservationTime: '7:00 PM',
