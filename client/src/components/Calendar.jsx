@@ -155,13 +155,6 @@ class Calendar extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     month: (new Date(this.props.selectedDate)).getMonth() + 1,
-  //     date: (new Date(this.props.selectedDate)).getDate()
-  //   });
-  // }
-
   handleDate(e) {
     this.props.pickDate(`${months[this.state.month].name} ${e.target.innerText}, 2020`);
   }
@@ -179,7 +172,6 @@ class Calendar extends React.Component {
   }
 
   render() {
-    console.log(this.state, 'here');
     return (
       <Container>
         <MonthContainer>
