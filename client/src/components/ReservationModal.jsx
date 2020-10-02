@@ -238,11 +238,10 @@ class ReservationModal extends React.Component {
               backgroundColor: 'rgba(0,0,0,.8)'
             },
             content: {
-              top: '20%',
-              left: '20%',
-              right: '20%',
-              bottom: '20%',
-              borderRadius: '5px'
+              margin: '150px auto',
+              borderRadius: '5px',
+              width: '676px',
+              height: '590px'
             }
           }}
         >
