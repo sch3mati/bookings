@@ -7,8 +7,9 @@ import axios from 'axios';
 import Availabilities from './Availabilities.jsx';
 import ReservationModal from './ReservationModal.jsx';
 import Calendar from './Calendar.jsx';
+import SummaryModal from './SummaryModal.jsx';
 
-const Wrapper = styled.section `
+const Wrapper = styled.div `
   width: 320px;
   border-radius: 2px;
   background-color: #fff;
@@ -37,6 +38,7 @@ const Button = styled.button `
   padding: .75rem 1rem;
   display: block;
   margin: auto;
+  cursor: pointer;
 `;
 
 const BookedAmount = styled.span `
@@ -58,7 +60,7 @@ class Bookings extends React.Component {
     super();
     this.state = {
       partySize: 2,
-      restaurantId: 88,
+      restaurantId: Math.floor(Math.random() * 100),
       restaurantName: '',
       reservationDate: (new Date()).toLocaleDateString(),
       reservationTime: '7:00 PM',
@@ -66,6 +68,7 @@ class Bookings extends React.Component {
       displayTimes: false,
       confirmationModalOpen: false,
       calendarModalOpen: false,
+      summaryModalOpen: false
     };
   }
 
@@ -132,7 +135,14 @@ class Bookings extends React.Component {
 
   hideModal() {
     this.setState({
-      confirmationModalOpen: false
+      confirmationModalOpen: false,
+      summaryModalOpen: true
+    });
+  }
+
+  hideSummaryModal() {
+    this.setState({
+      summaryModalOpen: false
     });
   }
 
@@ -146,8 +156,10 @@ class Bookings extends React.Component {
   render() {
     const renderConfirmationModal = this.state.confirmationModalOpen;
     const renderCalenderModal = this.state.calendarModalOpen;
+    const renderSummaryModal = this.state.summaryModalOpen;
     let confirmationModal;
     let calendarModal;
+    let summaryModal;
     if (renderConfirmationModal) {
       confirmationModal = < ReservationModal restaurantId={this.state.restaurantId} restaurantName={this.state.restaurantName} partySize={this.state.partySize} date={this.state.reservationDate} time={this.state.reservationTime} hideModal={this.hideModal.bind(this)} handleDisplayTimes={this.handleDisplayTimes.bind(this)}/>;
     } else {
@@ -158,9 +170,14 @@ class Bookings extends React.Component {
     } else {
       calendarModal = <div></div>;
     }
+    if (renderSummaryModal) {
+      summaryModal = < SummaryModal restaurantName={this.state.restaurantName} partySize={this.state.partySize} date={this.state.reservationDate} time={this.state.reservationTime} hideModal={this.hideSummaryModal.bind(this)}/>;
+    } else {
+      summaryModal = <div></div>;
+    }
     return (
       <div>
-        <Wrapper>
+        <Wrapper >
           <Title>Make a reservation</Title>
           < PartySize handlePartySize={this.handlePartySize.bind(this)}/>
           < ReservationDate selectedDate={this.state.reservationDate} handleDate={this.handleDate.bind(this)} />
@@ -173,6 +190,7 @@ class Bookings extends React.Component {
         </Wrapper>
         {confirmationModal}
         {calendarModal}
+        {summaryModal}
       </div>
     );
   }
