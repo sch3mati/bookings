@@ -32,10 +32,11 @@ const Details = styled.span `
   font-family: Helvetica;
   display: inline-block;
   vertical-align: middle;
+  text-align: center;
 `;
 
 const RestaurantName = styled.h2 `
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 28px;
   font-family: Helvetica;
@@ -88,17 +89,17 @@ const DinerDetails = styled.div `
   font-weight: 500;
   font-size: 16px;
   grid-column: 1 / span 2;
-    line-height: 24px;
-    margin: 16px 0;
+  line-height: 24px;
+  margin: 16px 0;
 `;
 
 const CheckboxLines = styled.div `
   grid-column: 1 / span 2;
   font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.5rem;
-    margin-bottom: 4px;
-    font-family: Helvetica
+  font-weight: 300;
+  line-height: 1.5rem;
+  margin-bottom: 4px;
+  font-family: Helvetica
 `;
 
 const Ending = styled.div `
@@ -150,31 +151,38 @@ class ReservationModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: true,
       firstName: '',
       lastName: '',
       contactInfo: '',
       occasion: '',
       email: '',
-      timer: '5:00'
+      minutes: 4,
+      seconds: 59
     };
   }
 
   componentDidMount() {
-    // var minutes = 4;
-    // var seconds = 59;
-    // var self = this;
-    // setInterval(function() {
-    //   if (seconds) {
-    //     seconds--;
-    //   } else if (!seconds && minutes) {
-    //     seconds = 59;
-    //     minutes--;
-    //   }
-    //   self.setState({
-    //     timer: `${minutes}:${seconds}`
-    //   });
-    // }, 1000);
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    if (this.state.seconds > 0) {
+      this.setState({
+        seconds: this.state.seconds - 1
+      })
+    } else {
+      this.setState({
+        seconds: 59,
+        minutes: this.state.minutes - 1
+      });
+    }
   }
 
   handleCloseModal () {
@@ -232,7 +240,7 @@ class ReservationModal extends React.Component {
       <div>
         <Modal
           ariaHideApp={false}
-          isOpen={this.state.showModal}
+          isOpen={true}
           style={{
             overlay: {
               backgroundColor: 'rgba(0,0,0,.8)'
@@ -262,7 +270,7 @@ class ReservationModal extends React.Component {
               <Details>{`${this.props.partySize} people`}</Details>
             </div>
             <CountDown>
-            We’re holding this table for you for {this.state.timer} minutes
+            We’re holding this table for you for {this.state.minutes}:{this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds} minutes
             </CountDown>
           </DetailContainer>
           <FormContainer>
