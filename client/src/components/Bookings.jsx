@@ -18,6 +18,8 @@ const Wrapper = styled.div `
   padding: .75rem 1rem;
   box-shadow: 0 2px 8px rgba(153,153,153,.4);
   margin: 0;
+  position: sticky;
+  top: 10px;
 `;
 
 const Title = styled.div `
@@ -51,8 +53,15 @@ const BookedAmount = styled.span `
 `;
 
 const ChartIcon = styled.img `
-vertical-align: -webkit-baseline-middle;
+  vertical-align: -webkit-baseline-middle;
   height: 24px;
+`;
+
+const Container = styled.div `
+  position: absolute;
+  right: 75px;
+  height: 2000px;
+  margin-top: 200px;
 `;
 
 class Bookings extends React.Component {
@@ -68,7 +77,8 @@ class Bookings extends React.Component {
       displayTimes: false,
       confirmationModalOpen: false,
       calendarModalOpen: false,
-      summaryModalOpen: false
+      summaryModalOpen: false,
+      stuck: false
     };
   }
 
@@ -177,20 +187,22 @@ class Bookings extends React.Component {
     }
     return (
       <div>
-        <Wrapper >
-          <Title>Make a reservation</Title>
-          < PartySize handlePartySize={this.handlePartySize.bind(this)}/>
-          < ReservationDate selectedDate={this.state.reservationDate} handleDate={this.handleDate.bind(this)} />
-          < ReservationTime handleTime={this.handleTime.bind(this)} />
-          {this.state.displayTimes ? < Availabilities handleReserve={this.handleReserve.bind(this)} availabilities={this.state.availabilities} /> : < Button onClick={this.handleSearch.bind(this)} >Find a table</Button>}
-          <ChartIcon src="https://cdn.icon-icons.com/icons2/1875/PNG/512/linechart_120376.png"></ChartIcon>
-          <BookedAmount>
-              Booked {5 + Math.floor(Math.random() * 5)} times today
-          </BookedAmount>
-        </Wrapper>
-        {confirmationModal}
-        {calendarModal}
-        {summaryModal}
+        <Container >
+          <Wrapper >
+            <Title>Make a reservation</Title>
+            < PartySize handlePartySize={this.handlePartySize.bind(this)}/>
+            < ReservationDate selectedDate={this.state.reservationDate} handleDate={this.handleDate.bind(this)} />
+            < ReservationTime handleTime={this.handleTime.bind(this)} />
+            {this.state.displayTimes ? < Availabilities handleReserve={this.handleReserve.bind(this)} availabilities={this.state.availabilities} /> : < Button onClick={this.handleSearch.bind(this)} >Find a table</Button>}
+            <ChartIcon src="https://cdn.icon-icons.com/icons2/1875/PNG/512/linechart_120376.png"></ChartIcon>
+            <BookedAmount>
+                Booked {5 + Math.floor(Math.random() * 5)} times today
+            </BookedAmount>
+          </Wrapper>
+          {confirmationModal}
+          {calendarModal}
+          {summaryModal}
+        </Container>
       </div>
     );
   }

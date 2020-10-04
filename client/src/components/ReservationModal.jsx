@@ -196,9 +196,6 @@ class ReservationModal extends React.Component {
       occasion: this.state.occasion,
     };
     axios.post(`/api/bookings/${this.props.restaurantId}`, data)
-      .then(response => {
-        console.log(response);
-      })
       .catch(error => {
         console.log(error);
       });
