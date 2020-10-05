@@ -14,7 +14,10 @@ const calculateReservations = (reservationData, restaurantData, reservation) => 
   });
 
   for (let time = Date.parse(reservation.date) - timeRange; time <= (Date.parse(reservation.date) + timeRange); time += timeIncrement) {
-    if (seatsTaken[time] + Number(reservation.partySize) <= 20) {
+    if (!seatsTaken[time]) {
+      seatsTaken[time] = 0;
+    }
+    if (seatsTaken[time] + Number(reservation.partySize) <= seatCapacity) {
       availabilities.push(new Date(time).toString());
     }
   }

@@ -160,15 +160,19 @@ class Calendar extends React.Component {
   }
 
   nextMonth(e) {
-    this.setState({
-      month: this.state.month + 1
-    });
+    if (months[this.state.month + 1]) {
+      this.setState({
+        month: this.state.month + 1
+      });
+    }
   }
 
   previousMonth(e) {
-    this.setState({
-      month: this.state.month - 1
-    });
+    if (months[this.state.month - 1]) {
+      this.setState({
+        month: this.state.month - 1
+      });
+    }
   }
 
   render() {
