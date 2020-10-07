@@ -3,9 +3,11 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../database');
 const calculateReservations = require('./calculateReservations');
+const cors = require('cors');
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));

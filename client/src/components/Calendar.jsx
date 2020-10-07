@@ -150,8 +150,8 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      month: (new Date()).getMonth() + 1,
-      date: (new Date()).getDate()
+      month: (new Date(this.props.selectedDate)).getMonth() + 1,
+      date: (new Date(this.props.selectedDate)).getDate()
     };
   }
 
