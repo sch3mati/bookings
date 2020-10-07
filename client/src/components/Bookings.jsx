@@ -9,13 +9,6 @@ import ReservationModal from './ReservationModal.jsx';
 import Calendar from './Calendar.jsx';
 import SummaryModal from './SummaryModal.jsx';
 
-// const stickyElm = document.querySelector('div');
-// const observer = new IntersectionObserver(
-//   ([e]) => e.target.classList.toggle('isSticky', e.intersectionRatio < 1),
-//   {threshold: [1]}
-// );
-// observer.observe(stickyElm);
-
 const Wrapper = styled.section `
   width: 320px;
   border-radius: 2px;
@@ -79,7 +72,6 @@ class Bookings extends React.Component {
       confirmationModalOpen: false,
       calendarModalOpen: false,
       summaryModalOpen: false,
-      stuck: false
     };
   }
 
@@ -162,10 +154,6 @@ class Bookings extends React.Component {
       reservationDate: date,
       calendarModalOpen: !this.state.calendarModalOpen
     });
-  }
-
-  handleSticky() {
-    console.log('detect sticky');
   }
 
   render() {
