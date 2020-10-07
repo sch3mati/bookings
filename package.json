@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "cors": "^2.8.5",
     "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
     "express": "^4.17.1",
     "faker": "^5.1.0",

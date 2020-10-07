@@ -9,7 +9,7 @@ import ReservationModal from './ReservationModal.jsx';
 import Calendar from './Calendar.jsx';
 import SummaryModal from './SummaryModal.jsx';
 
-const Wrapper = styled.div `
+const Wrapper = styled.section `
   width: 320px;
   border-radius: 2px;
   background-color: #fff;
@@ -52,16 +52,10 @@ const BookedAmount = styled.span `
   vertical-align: bottom
 `;
 
-const ChartIcon = styled.img `
-  vertical-align: -webkit-baseline-middle;
-  height: 24px;
-`;
-
 const Container = styled.div `
   position: absolute;
   right: 75px;
   height: 2000px;
-  margin-top: 200px;
 `;
 
 class Bookings extends React.Component {
@@ -78,7 +72,6 @@ class Bookings extends React.Component {
       confirmationModalOpen: false,
       calendarModalOpen: false,
       summaryModalOpen: false,
-      stuck: false
     };
   }
 
@@ -188,15 +181,14 @@ class Bookings extends React.Component {
     return (
       <div>
         <Container >
-          <Wrapper >
+          <Wrapper>
             <Title>Make a reservation</Title>
             < PartySize handlePartySize={this.handlePartySize.bind(this)}/>
             < ReservationDate selectedDate={this.state.reservationDate} handleDate={this.handleDate.bind(this)} />
             < ReservationTime handleTime={this.handleTime.bind(this)} />
             {this.state.displayTimes ? < Availabilities handleReserve={this.handleReserve.bind(this)} availabilities={this.state.availabilities} /> : < Button onClick={this.handleSearch.bind(this)} >Find a table</Button>}
-            <ChartIcon src="https://cdn.icon-icons.com/icons2/1875/PNG/512/linechart_120376.png"></ChartIcon>
             <BookedAmount>
-                Booked {5 + Math.floor(Math.random() * 5)} times today
+                 📈 Booked {5 + Math.floor(Math.random() * 5)} times today
             </BookedAmount>
           </Wrapper>
           {confirmationModal}
