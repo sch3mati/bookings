@@ -37,4 +37,69 @@ npm install -g webpack
 npm install
 ```
 
-# bookings
+## API Endpoints
+
+### Get restaurant name
+  * GET `/api/bookings/restaurantName/:restaurantId`
+
+**Success Status Code:** `200`
+
+**Returns:** JSON
+
+```json
+    {
+      "id": "Number",
+      "name": "String",
+      "seatCapacity": "Number"
+    }
+```
+
+### Get reservation
+  * GET `/api/bookings/:restaurantId`
+
+**Success Status Code:** `200`
+
+**Returns:** string: whether or not reservation is made
+
+
+### Add reservation
+  * POST `/api/bookings/:restaurantId`
+
+**Success Status Code:** `200`
+
+**Request Body**: Expects JSON with the following keys.
+
+```json
+    {
+      "restuarantId": "Number",
+      "name": "String",
+      "partySize": "Number",
+      "date": "Number",
+      "contactInfo": "String",
+      "occasion": "String"
+    }
+```
+
+### Update reservation info
+  * PUT `/api/bookings/:restaurantId`
+
+
+**Success Status Code:** `200`
+
+**Request Body**: Expects JSON with any of the following keys (include only keys to be updated)
+
+```json
+    {
+      "restuarantId": "Number",
+      "name": "String",
+      "partySize": "Number",
+      "date": "Number",
+      "contactInfo": "String",
+      "occasion": "String"
+    }
+```
+
+### Delete reservation
+  * DELETE `/api/bookings/:restaurantId`
+
+**Success Status Code:** `200`
