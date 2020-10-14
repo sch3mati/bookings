@@ -1,7 +1,11 @@
 const mysql = require('mysql');
-const mysqlConfig = require('./config.js');
+// const mysqlConfig = require('./config.js');
 
-const dbConnection = mysql.createConnection(mysqlConfig);
+const dbConnection = mysql.createConnection({
+  host: 'localhost',
+  user: 'students',
+  database: 'FEC_Bookings'
+});
 
 //Only used for seeding database
 const addRestaurant = (name, seatCapactiy) => {

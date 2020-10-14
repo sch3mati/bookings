@@ -29,7 +29,7 @@ for (let restaurant = 1; restaurant <= numberOfRestaurants; restaurant++) {
     };
     db.addReservation(data, (err) => {
       if (err) {
-        console.log('seeding failed');
+        console.log('seeding failed', err);
       }
     });
   }
