@@ -12,7 +12,7 @@ create table if not exists restaurants (
 
 create table if not exists reservations (
   id serial primary key,
-  restaurantId int not null,
+  restaurantId int references restaurants (id) not null,
   partySize int not null,
   name varchar(255) not null,
   date bigint not null,
