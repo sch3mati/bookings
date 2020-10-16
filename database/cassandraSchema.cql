@@ -37,7 +37,6 @@ CREATE TABLE time_slots_restaurantId (
   date bigint,
   time time,
   seatCapacity int,
-  // booked boolean,
   PRIMARY KEY (restaurantId, (date, time))
 )
 

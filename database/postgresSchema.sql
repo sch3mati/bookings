@@ -15,7 +15,6 @@ create table if not exists timeSlots (
   date bigint not null,
   time time not null,
   seatCapacity int not null,
-  -- booked boolean not null,
 )
 
 create table if not exists reservations (
