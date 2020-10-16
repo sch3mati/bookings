@@ -39,8 +39,8 @@ npm install
 
 ## API Endpoints
 
-### Get restaurant name
-  * GET `/api/bookings/restaurantName/:restaurantId`
+### Get a restaurant
+  * GET `/api/restaurants/:restaurantId`
 
 **Success Status Code:** `200`
 
@@ -50,38 +50,64 @@ npm install
     {
       "id": "Number",
       "name": "String",
-      "seatCapacity": "Number"
+      "seatCapacity": "Number",
+      "timeSlots": [{"Capacity": "Number", "Time": "Number"}]
     }
 ```
 
-### Get reservation
-  * GET `/api/bookings/:restaurantId`
+### Get a reservation
+  * GET `/api/restaurants/:restaurantId/bookings/:bookingId`
 
 **Success Status Code:** `200`
 
-**Returns:** string: whether or not reservation is made
+**Returns:**
+  ```json
+    {
+      "restuarantId": "Number",
+      "user": "String",
+      "partySize": "Number",
+      "dateAndTime": "Number",
+      "phone": "String",
+      "occasion": "String"
+    }
+```
 
-
-### Add reservation
-  * POST `/api/bookings/:restaurantId`
+### Get all reservations
+  *GET `/api/resraurants/:restaurantId/bookings`
 
 **Success Status Code:** `200`
 
-**Request Body**: Expects JSON with the following keys.
+**Returns:**
+  ```json
+    {
+      "restuarantId": "Number",
+      "user": "String",
+      "partySize": "Number",
+      "dateAndTime": "Number",
+      "phone": "String",
+      "occasion": "String"
+    }
+```
+
+### Add a reservation
+  * POST `/api/restaurants/:restaurantId/bookings`
+
+**Success Status Code:** `200`
 
 ```json
     {
       "restuarantId": "Number",
       "name": "String",
       "partySize": "Number",
-      "date": "Number",
-      "contactInfo": "String",
+      "dateAndTime": "Number",
+      "phone": "String",
       "occasion": "String"
     }
 ```
 
-### Update reservation info
-  * PUT `/api/bookings/:restaurantId`
+
+### Update a reservation
+  * PATCH `/api/restaurants/:restaurantId/bookings/:bookingId`
 
 
 **Success Status Code:** `200`
@@ -90,16 +116,15 @@ npm install
 
 ```json
     {
-      "restuarantId": "Number",
       "name": "String",
       "partySize": "Number",
-      "date": "Number",
-      "contactInfo": "String",
+      "dateAndTime": "Number",
+      "phone": "String",
       "occasion": "String"
     }
 ```
 
-### Delete reservation
-  * DELETE `/api/bookings/:restaurantId`
+### Delete a reservation
+  * DELETE `/api/restaurants/:restaurantId/bookings/:bookingId`
 
 **Success Status Code:** `200`

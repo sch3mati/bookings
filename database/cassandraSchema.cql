@@ -3,22 +3,43 @@ CREATE KEYSPACE bookings WITH REPLICATION = { 'class' : 'SimpleStrategy', 'repli
 
 use bookings;
 
-CREATE TABLE restaurants (
+CREATE TABLE restaurants_by_id (
   id uuid,
   seatCapacity int,
   name varchar,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE reservations_by_restaurant (
+CREATE TABLE reservations_by_timeSlot (
   id uuid,
-  restaurantId int,
+  timeSlot int,
   partySize int,
   name varchar,
-  date bigint,
-  contactInfo varchar,
+  phone varchar,
   occasion varchar,
-  PRIMARY KEY (restaurantId, id)
+  PRIMARY KEY (timeSlot)
+  //removed dateAndTime bigint
 );
+
+CREATE TABLE users (
+  id uuid,
+  reservationIds int,
+  username varchar,
+  name varchar,
+  phone varchar,
+  email varchar,
+  PRIMARY KEY (id)
+)
+
+CREATE TABLE time_slots_restaurantId (
+  id uuid,
+  restaurantId int,
+  date bigint,
+  time time,
+  seatCapacity int,
+  // booked boolean,
+  PRIMARY KEY (restaurantId, (date, time))
+)
+
 
 //source 'cassandraSchema.cql'
