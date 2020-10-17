@@ -12,10 +12,11 @@ create table if not exists restaurants (
 
 create table if not exists timeSlots (
   id serial primary key,
-  date bigint not null,
+  date text not null,
   time time not null,
   seatCapacity int not null,
-)
+  restaurantId int references restaurants (id) not null
+);
 
 create table if not exists reservations (
   id serial primary key,
@@ -26,7 +27,7 @@ create table if not exists reservations (
   phone varchar(255) not null,
   occasion varchar(255) null,
   timeSlot int references timeSlots (id) not null
-)
+);
 
 create table if not exists users (
   id serial primary key,
@@ -35,7 +36,7 @@ create table if not exists users (
   reservationIds int references reservations (id),
   phone varchar(255) not null,
   email varchar(255) not null
-)
+);
 
 
 -- psql postgres < postgresSchema.sql
