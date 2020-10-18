@@ -15,6 +15,8 @@
     "create-restaurant-timeSlot-csv": "node --max-old-space-size=8192 database/postgres/seeding/restaurantsAndTimeSlots.js",
     "create-reservations-csv": "node --max-old-space-size=8192 database/postgres/seeding/reservations.js",
     "create-users-csv": "node --max-old-space-size=8192 database/postgres/seeding/users.js",
+    "create-cass-restTime-csv": "node --max-old-space-size=8192 database/cassandra/seeding/cassRestaurantAndTimeSlots.js",
+    "create-cass-reservations-csv": "node --max-old-space-size=8192 database/cassandra/seeding/cassReservations.js",
     "sql": "mysql -u root -p < database/schema.sql",
     "test:coverage": "jest --verbose --coverage --detectOpenHandles"
   },
