@@ -26,7 +26,7 @@ CREATE TABLE users (
   reservationId int,
   phone varchar,
   email varchar,
-  PRIMARY KEY (id)
+  PRIMARY KEY (reservationId)
 );
 
 CREATE TABLE time_slots_by_restaurantId (
