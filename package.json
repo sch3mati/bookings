@@ -12,7 +12,9 @@
     "react-dev": "webpack -d --watch",
     "test": "jest --detectOpenHandles",
     "seed": "node database/dbseeder.js",
-    "create-restaurant-timeSlot-csv": "node database/postgres/seeding/restaurantsAndTimeSlots.js",
+    "create-restaurant-timeSlot-csv": "node --max-old-space-size=8192 database/postgres/seeding/restaurantsAndTimeSlots.js",
+    "create-reservations-csv": "node --max-old-space-size=8192 database/postgres/seeding/reservations.js",
+    "create-users-csv": "node --max-old-space-size=8192 database/postgres/seeding/users.js",
     "sql": "mysql -u root -p < database/schema.sql",
     "test:coverage": "jest --verbose --coverage --detectOpenHandles"
   },
