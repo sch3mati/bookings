@@ -16,14 +16,13 @@ CREATE TABLE reservations_by_timeSlot (
   partySize int,
   name varchar,
   phone varchar,
-  occasion varchar,
   PRIMARY KEY (timeSlot)
   //removed dateAndTime bigint
 );
 
 CREATE TABLE users (
   id uuid,
-  reservationIds int,
+  reservationId int,
   username varchar,
   name varchar,
   phone varchar,
@@ -31,10 +30,10 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 )
 
-CREATE TABLE time_slots_restaurantId (
+CREATE TABLE time_slots_by_restaurantId (
   id uuid,
   restaurantId int,
-  date bigint,
+  date varchar,
   time time,
   seatCapacity int,
   PRIMARY KEY (restaurantId, (date, time))

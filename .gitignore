@@ -25,3 +25,6 @@ build/
 dist/
 
 config.js
+
+restaurantInfo.csv
+*.csv
