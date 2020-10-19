@@ -12,7 +12,7 @@ let seatCapacities = [];
 const dataGen = async () => {
   const createRestaurantTable = async () => {
     writer.pipe(fs.createWriteStream('cassRestaurants.csv'));
-    for (let i = 0; i < 250000; i++) {
+    for (let i = 0; i < 1000000; i++) {
       let cap = faker.random.number({min:12, max: 50})
       seatCapacities.push(cap);
       writer.write({
@@ -36,8 +36,8 @@ let hours = 10;
 const dataGenForTime = async () => {
   const createTimeSlotTable = async () => {
     writer2.pipe(fs.createWriteStream('cassTimeSlots.csv'));
-    for (let i = 0; i < 250000; i++) {
-      if ( i === 10000 || i === 100000 || i === 150000 || i === 200000) {
+    for (let i = 0; i < 1000000; i++) {
+      if ( i === 100000 || i === 250000 || i === 500000 || i === 750000) {
         console.log(`seeded ${i} data`)
       }
       for (let j = 0; j < 21; j++) {
@@ -51,10 +51,11 @@ const dataGenForTime = async () => {
             hours = 11;
           }
         }
+        let date = faker.date.soon(90);
         writer2.write({
           restaurantId: i + 1,
           id: timeSlotId,
-          date: faker.date.soon(90),
+          date: date.toString().slice(4,15),
           time: `${hours}:${minutes}:00`,
           seatCapacity: faker.random.number({min:12, max: seatCapacities[i]}),
         });
