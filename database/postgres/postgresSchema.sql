@@ -7,7 +7,7 @@ create database bookings;
 create table if not exists restaurants (
   id serial primary key,
   seatCapacity int not null,
-  name varchar(255) not null
+  name varchar(50) not null
 );
 
 create table if not exists timeSlots (
@@ -20,21 +20,19 @@ create table if not exists timeSlots (
 
 create table if not exists reservations (
   id serial primary key,
-  restaurantId int references restaurants (id) not null,
+  timeSlotId int references timeSlots (id) not null,
   partySize int not null,
-  name varchar(255) not null,
-  dateAndTime varchar(255) not null,
-  phone varchar(255) not null,
-  timeSlot int references timeSlots (id) not null
+  name varchar(50) not null,
+  phone varchar(50) not null
 );
 
 create table if not exists users (
   id serial primary key,
-  username varchar(255)  not null,
-  name varchar(255) not null,
+  username varchar(50) not null,
+  name varchar(50) not null,
   reservationId int references reservations (id),
-  phone varchar(255) not null,
-  email varchar(255) not null
+  phone varchar(50) not null,
+  email varchar(50) not null
 );
 
 COPY restaurants FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/restaurantInfo.csv' CSV header;

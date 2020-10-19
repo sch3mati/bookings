@@ -4,7 +4,7 @@ const faker = require('faker');
 let writer = csvWriter();
 let writer2 = csvWriter();
 
-let timeSlotId = 0;
+let timeSlotId = 1;
 
 const restaurantEnding = ['Cafe', 'Restaurant', 'Steak House', 'Pizza House', 'Diner', 'Eatery', 'Joint', 'Canteen', 'BBQ', 'Chophouse', 'Bar', 'Bistro', 'Sandwiches'];
 let seatCapacities = [];
@@ -12,7 +12,7 @@ let seatCapacities = [];
 const dataGen = async () => {
   const createRestaurantTable = async () => {
     writer.pipe(fs.createWriteStream('restaurantInfo.csv'));
-    for (let i = 0; i < 250000; i++) {
+    for (let i = 0; i < 1000000; i++) {
       let cap = faker.random.number({min:12, max: 50})
       seatCapacities.push(cap);
       writer.write({
@@ -26,13 +26,7 @@ const dataGen = async () => {
 
   }
   await createRestaurantTable();
-  // db.query("COPY restaurants (id, seatCapacity, name) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/restaurantInfo.csv' DELIMITERS ',' CSV HEADER;", (err, res) => {
-  //   if (err) {
-  //     console.log(err)
-  //   } else {
-  //     console.log('restaurant query completed', res)
-  //   }
-  // })
+
 }
 
 dataGen();
@@ -43,8 +37,8 @@ let hours = 10;
 const dataGenForTime = async () => {
   const createTimeSlotTable = async () => {
     writer2.pipe(fs.createWriteStream('timeSlots.csv'));
-    for (let i = 0; i < 250000; i++) {
-      if ( i === 10000 || i === 100000 || i === 150000 || i === 200000) {
+    for (let i = 0; i < 1000000; i++) {
+      if ( i === 100000 || i === 250000 || i === 500000 || i === 750000) {
         console.log(`seeded ${i} data`)
       }
       for (let j = 0; j < 21; j++) {
@@ -58,9 +52,10 @@ const dataGenForTime = async () => {
             hours = 11;
           }
         }
+        let date = faker.date.soon(90);
         writer2.write({
           id: timeSlotId,
-          date: faker.date.soon(90),
+          date: date.toString().slice(4,15),
           time: `${hours}:${minutes}:00`,
           seatCapacity: faker.random.number({min:12, max: seatCapacities[i]}),
           restaurantId: i + 1,
@@ -73,13 +68,6 @@ const dataGenForTime = async () => {
     console.log('generated time slot csv');
   }
   await createTimeSlotTable();
-  // db.query("COPY timeSlots (id, date, time, seatCapacity, restaurantId) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/timeSlots.csv' DELIMITERS ',' CSV HEADER;", (err, res) => {
-  //   if (err) {
-  //     console.log(err)
-  //   } else {
-  //     console.log('time slot query completed', res)
-  //   }
-  // })
 }
 
 dataGenForTime();
