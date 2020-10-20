@@ -13,7 +13,7 @@ const dataGen = async () => {
       }
       writer.write({
         id: i + 1,
-        timeSlotId: Math.ceil(Math.random()*21000000),
+        timeSlotId: (i % 21000000) + 1,
         partySize: Math.ceil(Math.random()*10),
         name: faker.name.findName(),
         phone: faker.phone.phoneNumberFormat()
