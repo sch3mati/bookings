@@ -12,7 +12,6 @@ const dataGen = async () => {
         console.log(`seeded ${i} data`)
       }
       writer.write({
-        id: i + 1,
         timeSlotId: (i % 21000000) + 1,
         partySize: Math.ceil(Math.random()*10),
         name: faker.name.findName(),

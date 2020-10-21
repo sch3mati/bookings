@@ -9,7 +9,7 @@ const dataGen = async () => {
     writer.pipe(fs.createWriteStream('users.csv'));
     for (let i = 0; i < 5000000; i++) {
       writer.write({
-        id: i + 1,
+        // id: i + 1,
         username: faker.internet.userName(),
         name: faker.name.findName(),
         reservationsId: Math.ceil(Math.random()*30000000),

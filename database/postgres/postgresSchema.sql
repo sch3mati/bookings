@@ -14,7 +14,6 @@ create table if not exists timeSlots (
   id serial primary key,
   date text not null,
   time time not null,
-  seatCapacity int not null,
   restaurantId int references restaurants (id) not null
 );
 
@@ -35,13 +34,13 @@ create table if not exists users (
   email varchar(50) not null
 );
 
-COPY restaurants FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/restaurantInfo.csv' CSV header;
+COPY restaurants (seatCapacity, name) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/restaurantInfo.csv' DELIMITERS ',' CSV header;
 
-COPY timeSlots FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/timeSlots.csv' CSV header;
+COPY timeSlots (date, time, restaurantId) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/timeSlots.csv' DELIMITERS ',' CSV header;
 
-COPY reservations FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/reservations.csv' CSV header;
+COPY reservations (timeSlotId, partySize, name, phone) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/reservations.csv' DELIMITERS ',' CSV header;
 
-COPY users FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/users.csv' CSV header;
+COPY users (username, name, reservationId, phone, email) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/users.csv' DELIMITERS ',' CSV header;
 
 
 -- psql postgres < postgresSchema.sql

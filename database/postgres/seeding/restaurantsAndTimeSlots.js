@@ -4,19 +4,14 @@ const faker = require('faker');
 let writer = csvWriter();
 let writer2 = csvWriter();
 
-let timeSlotId = 1;
-
 const restaurantEnding = ['Cafe', 'Restaurant', 'Steak House', 'Pizza House', 'Diner', 'Eatery', 'Joint', 'Canteen', 'BBQ', 'Chophouse', 'Bar', 'Bistro', 'Sandwiches'];
-let seatCapacities = [];
 
 const dataGen = async () => {
   const createRestaurantTable = async () => {
     writer.pipe(fs.createWriteStream('restaurantInfo.csv'));
     for (let i = 0; i < 1000000; i++) {
       let cap = faker.random.number({min:12, max: 50})
-      seatCapacities.push(cap);
       writer.write({
-        id: i + 1,
         seatCapacity: cap,
         name: `${faker.name.firstName()}'s ${restaurantEnding[Math.floor(Math.random() * 13)]}`,
       });
@@ -54,13 +49,10 @@ const dataGenForTime = async () => {
         }
         let date = faker.date.soon(90);
         writer2.write({
-          id: timeSlotId,
           date: date.toString().slice(4,15),
           time: `${hours}:${minutes}:00`,
-          seatCapacity: faker.random.number({min:12, max: seatCapacities[i]}),
           restaurantId: i + 1,
         });
-        timeSlotId++;
       }
     }
 
