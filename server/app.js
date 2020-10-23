@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const db = require('../database');
+const db = require('../database/postgres');
 const calculateReservations = require('./calculateReservations');
 const cors = require('cors');
 
@@ -30,6 +30,7 @@ app.get('/api/bookings/restaurantName/:restaurantId', (req, res) => {
 app.post('/api/bookings/:restaurantId', (req, res) => {
   const reservation = req.body;
   reservation.restaurantId = req.params.restaurantId;
+  console.log(reservation);
   db.addReservation(reservation, (err) => {
     if (err) {
       res.status(400).send('could not reserve');
@@ -41,11 +42,14 @@ app.post('/api/bookings/:restaurantId', (req, res) => {
 
 app.get('/api/bookings/:restaurantId', (req, res) => {
   const reservation = req.query;
+  console.log(reservation)
   reservation.restaurantId = req.params.restaurantId;
   db.getReservations(reservation, (err, reservationData, restaurantData) => {
     if (err) {
       res.status(400).send('error finding reservations');
     } else {
+      console.log('res', reservationData)
+      console.log('restar', restaurantData)
       res.status(200).send(calculateReservations(reservationData, restaurantData, reservation));
     }
   });

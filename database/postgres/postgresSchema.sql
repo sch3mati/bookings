@@ -7,43 +7,40 @@ create database bookings;
 create table if not exists restaurants (
   id serial primary key,
   seatCapacity int not null,
-  name varchar(255) not null
+  name varchar(50) not null
 );
 
 create table if not exists timeSlots (
   id serial primary key,
   date text not null,
   time time not null,
-  seatCapacity int not null,
   restaurantId int references restaurants (id) not null
 );
 
 create table if not exists reservations (
   id serial primary key,
-  restaurantId int references restaurants (id) not null,
+  timeSlotId int references timeSlots (id) not null,
   partySize int not null,
-  name varchar(255) not null,
-  dateAndTime varchar(255) not null,
-  phone varchar(255) not null,
-  timeSlot int references timeSlots (id) not null
+  name varchar(50) not null,
+  phone varchar(50) not null
 );
 
 create table if not exists users (
   id serial primary key,
-  username varchar(255)  not null,
-  name varchar(255) not null,
+  username varchar(50) not null,
+  name varchar(50) not null,
   reservationId int references reservations (id),
-  phone varchar(255) not null,
-  email varchar(255) not null
+  phone varchar(50) not null,
+  email varchar(50) not null
 );
 
-COPY restaurants FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/restaurantInfo.csv' CSV header;
+COPY restaurants (seatCapacity, name) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/restaurantInfo.csv' DELIMITERS ',' CSV header;
 
-COPY timeSlots FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/timeSlots.csv' CSV header;
+COPY timeSlots (date, time, restaurantId) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/timeSlots.csv' DELIMITERS ',' CSV header;
 
-COPY reservations FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/reservations.csv' CSV header;
+COPY reservations (timeSlotId, partySize, name, phone) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/reservations.csv' DELIMITERS ',' CSV header;
 
-COPY users FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/users.csv' CSV header;
+COPY users (username, name, reservationId, phone, email) FROM '/Users/victoriachen/Desktop/SDC-project/bookings-service/users.csv' DELIMITERS ',' CSV header;
 
 
 -- psql postgres < postgresSchema.sql

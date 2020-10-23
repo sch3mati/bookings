@@ -72,23 +72,6 @@ npm install
     }
 ```
 
-### Get all reservations
-  *GET `/api/resraurants/:restaurantId/bookings`
-
-**Success Status Code:** `200`
-
-**Returns:**
-  ```json
-    {
-      "restuarantId": "Number",
-      "user": "String",
-      "partySize": "Number",
-      "dateAndTime": "Number",
-      "phone": "String",
-      "occasion": "String"
-    }
-```
-
 ### Add a reservation
   * POST `/api/restaurants/:restaurantId/bookings`
 
