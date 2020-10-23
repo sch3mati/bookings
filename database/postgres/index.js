@@ -21,8 +21,21 @@ const addRestaurant = (name, seatCapactiy) => {
 };
 
 const addReservation = (data, callback) => {
-  let date = data.date.slice(0, 11);
-  let time = data.date.slice(11);
+  let dateArr = data.date.split(' ');
+  let month = dateArr[0].slice(0, 3);
+  let day = dateArr[1].split('');
+  day.pop();
+  day = day.join('');
+  let date = month + day;
+  let hour = dateArr[3].split(':');
+  if (hour[0].length === 1) {
+    hour[0] = '0' + hour[0];
+  }
+  if (dateArr[dateArr.length - 1][0] === 'P') {
+    hour[0] = (Number(hour[0]) + 12).toString();
+  }
+  let time = hour.join(':') + ':00';
+
   let returnTimeSlotId;
 
   client
