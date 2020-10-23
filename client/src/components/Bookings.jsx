@@ -76,7 +76,7 @@ class Bookings extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/bookings/restaurantName/${this.state.restaurantId}`, {
+    axios.get(`/api/restaurants/${this.state.restaurantId}`, {
       params: {
         restaurantId: this.state.restaurantId
       }
@@ -109,7 +109,7 @@ class Bookings extends React.Component {
   }
 
   handleSearch() {
-    axios.get(`/api/bookings/${this.state.restaurantId}`, {
+    axios.get(`/api/restaurants/${this.state.restaurantId}/bookings/:bookingId`, {
       params: {
         date: `${this.state.reservationDate} ${this.state.reservationTime}`,
         partySize: this.state.partySize
