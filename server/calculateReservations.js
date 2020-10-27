@@ -14,8 +14,6 @@ const calculateReservations = (reservationData, restaurantData, reservation) => 
     }
   });
 
-  console.log(reservationDataAval);
-
   reservationDataAval.map((reservation) => {
     if (!seatsTaken[reservation.date]) {
       seatsTaken[reservation.date] = reservation.partySize;
